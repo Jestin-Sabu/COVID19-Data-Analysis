@@ -3,6 +3,7 @@ Analyzing the rate of spread and death caused by COVID19 with python
 API: https://api.covid19api.com/  
 INSTRUCTIONS 
 Run the files in the following order 
+
 1) setup.py 
 2)download.py 
 3)process.py 
