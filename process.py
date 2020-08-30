@@ -3,6 +3,10 @@ import os
 import pandas as pd
 
 def main():
+    if not os.path.exists('country'):
+        print('country directory missing')
+        quit()
+
     #browsing through each file in country directory
     for filename in os.listdir('country'):
         data = pd.read_csv('country/' + filename, delimiter=',')

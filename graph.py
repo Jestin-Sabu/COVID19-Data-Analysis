@@ -17,6 +17,11 @@ def main():
     length = len(os.listdir('country'))
     count = 0;
 
+    #checking the existance of country directory
+    if not os.path.exists('graph'):
+        print('country directory missing')
+        quit()
+    
     #browsing through each file in the directory
     for filename in os.listdir('country'):
         country_name = filename.split('.csv')[0]
