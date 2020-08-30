@@ -11,21 +11,25 @@ def main():
     #Supress warnings from plot()
     warnings.filterwarnings("ignore")
 
-    #making graph directory if it doesn't exist
-    if not os.path.exists('graph'):
-        os.mkdir('graph')
-    length = len(os.listdir('country'))
+    read_directory = 'country'
+    write_directory = 'graph'
+
+    #making write_directory if it doesn't exist
+    if not os.path.exists(write_directory):
+        os.mkdir(write_directory)
+
+    length = len(os.listdir(read_directory)) - 1
     count = 0;
 
-    #checking the existance of country directory
-    if not os.path.exists('graph'):
-        print('country directory missing')
+    #checking the existance of read_directory
+    if not os.path.exists(read_directory):
+        print(read_directory + ' directory missing')
         quit()
 
     #browsing through each file in the directory
-    for filename in os.listdir('country'):
+    for filename in os.listdir(read_directory):
         country_name = filename.split('.csv')[0]
-        data = pd.read_csv('country/' + filename, delimiter=',')
+        data = pd.read_csv(read_directory + '/' + filename, delimiter=',')
         #use below code to exclude 'Active' parameter
         #data.drop('Active', axis = 1).plot( x = 'Date', figsize = (15,8))
         data.plot(x = 'Date', figsize = (15,8))
@@ -41,11 +45,15 @@ def main():
         #plt.show()
 
         #saving the generated graph
-        plt.savefig('graph/' + filename.split('.csv')[0] + '.svg', format='svg', dpi=1200)
-        print('Visualized COVID19 trend in ' + country_name)
+        plt.savefig(write_directory + '/' + filename.split('.csv')[0] + '.svg', format='svg', dpi=1200)
+        print('[{0:.2f}%] '.format((count/length)*100) + ' Visualized COVID19 trend in ' + country_name)
 
         #small warning for the panicing user
-        if(count == length-1):
+        if(count == length):
             print('Please checkout graph directory after the execution ends')
             print('Please wait, finalizing...')
         count = count + 1
+
+        plt.close()
+
+main()
