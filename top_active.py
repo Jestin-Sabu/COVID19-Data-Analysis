@@ -45,3 +45,7 @@ def main():
     plt.savefig('misc/top_10_countries.svg', format = 'svg', dpi = 1200)
     print('Please checkout misc directory for the saved graph')
     print('Please wait, finalizing...')
+
+    plt.close
+
+main()

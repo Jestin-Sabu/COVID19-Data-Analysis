@@ -7,18 +7,21 @@ import os
 import csv
 
 def main():
+    write_directory = 'raw_data'
+
     #simulating web browser
     URL = 'https://api.covid19api.com/total/country/'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
 
-    #making country directory if it doesn't exist
-    if not os.path.exists('country'):
-        os.mkdir('country')
+    #making write_directory if it doesn't exist
+    if not os.path.exists(write_directory):
+        os.mkdir(write_directory)
+
     print('Reading countries.csv')
     try:
         csv_reader = csv.reader(open('countries.csv', 'r'), delimiter=',')
     except:
-        print('Please run setup.py first')
+        print('Failed to read countries.csv')
         quit()
 
     #reading total no of countries
@@ -26,7 +29,7 @@ def main():
     csv_reader = csv.reader(open('countries.csv', 'r'), delimiter=',')
 
     #fail counter intialization
-    count = 1;
+    count = 0;
     fail = 0
     fail_list = list()
 
@@ -44,19 +47,26 @@ def main():
             print('[{0:.2f}%] '.format((count/row_count)*100) + reg_url)
             req = Request(url=reg_url, headers=headers)
             html = urlopen(req).read()
-            filename = countries[0] + '.csv'
-            data = pd.DataFrame(json.loads(html.decode()))
-            data = data[['Confirmed', 'Deaths', 'Recovered', 'Active', 'Date']]
         except:
-            print('\n Failed to retrive data from ' + reg_url + '\n')
+            print('\nFailed to retrive data from ' + reg_url + '\n')
             fail = fail + 1
             fail_list.append(countries[0])
             continue;
-        data.to_csv('country/' + filename,index=False)
+        try:
+            data = pd.DataFrame(json.loads(html.decode()))
+            data = data[['Confirmed', 'Deaths', 'Recovered', 'Active', 'Date']]
+        except:
+            print('\nRecieved invalid response from ' + reg_url + '\n')
+            fail = fail + 1
+            fail_list.append(countries[0])
+            continue;
+        filename = countries[0] + '.csv'
+        data.to_csv(write_directory + '/' + filename,index=False)
 
     #printing fail report
     if fail > 0:
         print('No. of Failures : ' + str(fail))
-        read = ('Press \'x\' to view them, or else press any other key : ')
+        read = input('Press \'x\' to view them, or else press any other key : ')
         if read == 'x':
             print(fail_list)
+main()

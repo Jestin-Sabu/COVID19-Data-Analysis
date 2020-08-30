@@ -22,7 +22,9 @@ def main():
     try:
         country.to_csv('countries.csv', header = False, index = False)
     except:
-        print('\nPlease close countries.csv file')
+        print('Failed to save file contries.csv')
         quit()
 
     print('\nSuccessfully saved the name of countries to countries.csv')
+
+main()
