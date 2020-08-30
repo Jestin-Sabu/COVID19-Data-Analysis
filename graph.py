@@ -21,7 +21,7 @@ def main():
     if not os.path.exists('graph'):
         print('country directory missing')
         quit()
-    
+
     #browsing through each file in the directory
     for filename in os.listdir('country'):
         country_name = filename.split('.csv')[0]
@@ -46,6 +46,6 @@ def main():
 
         #small warning for the panicing user
         if(count == length-1):
-            print('Please wait, finalizing...')
             print('Please checkout graph directory after the execution ends')
+            print('Please wait, finalizing...')
         count = count + 1
