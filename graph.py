@@ -1,7 +1,7 @@
 #Program that produces useful graph from the prepared data
 
 def main():
-    print('Please wait, intializing graph genrator...')
+    print('Please wait, intializing graph generator...')
     import os
     import warnings
     import seaborn as sns
