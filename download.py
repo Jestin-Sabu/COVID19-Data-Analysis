@@ -1,4 +1,4 @@
-#program to download COVID19 tren in each country that is listed in countries.csv
+#program to download COVID19 trend in each country that is listed in countries.csv
 
 from urllib.request import urlopen, Request
 import json

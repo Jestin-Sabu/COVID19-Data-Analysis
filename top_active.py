@@ -1,5 +1,5 @@
+#Program that generates a graph of top 10 covid active countries
 def main():
-    #Program that generates a graph of top 10 covid active countries
     print('Please wait Loading necessary files...')
     import os
     import pandas as pd
