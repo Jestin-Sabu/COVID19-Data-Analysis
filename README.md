@@ -1,6 +1,6 @@
 
 # COVID19-Data-Analysis
-<p>Analyzing the rate of spread and death caused by COVID19 with python</p>
+<p>Analyzing and visualising the rate of spread and death caused by COVID19 with python</p>
 <p>API: https://api.covid19api.com/</p>
 <h3>INSTRUCTIONS</h3>
 <h4>Run the files in the following order</h4>
