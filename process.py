@@ -27,9 +27,9 @@ def main():
             data.at[i, 'Date'] = data.at[i, 'Date'].split('T')[0]
             if(i == 0):
                 continue
-            data.at[i, 'Confirmed'] = data.at[i, 'Confirmed'] - data.at[i-1, 'Confirmed']
+            data.at[i, 'Confirmed'] = data.at[i, 'Confirmed'] - data.at[i-1, 'CONFIRMED/ COVID POSITIVE']
             data.at[i, 'Deaths'] = data.at[i, 'Deaths'] - data.at[i-1, 'Deaths']
-            data.at[i, 'Recovered'] = data.at[i, 'Recovered'] - data.at[i-1, 'Recovered']
+            data.at[i, 'Recovered'] = data.at[i, 'Recovered'] - data.at[i-1, 'Recovered / COVID NEGATIVE']
 
         #saving processed data
         data.to_csv(write_directory + '/' + filename, index = False)
